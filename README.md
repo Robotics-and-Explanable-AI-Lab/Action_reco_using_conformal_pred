@@ -94,6 +94,26 @@ python test_models.py Assembly101 \
 - Pretrained models must be downloaded separately and placed in `pretrained_models/`.
 - Ensure that data paths in the scripts are correctly set before running the commands.
 
+- 
+## Issues & Troubleshooting
+
+### Evaluation: Frames Alignment Issue
+- Make sure the extracted frames are **correctly aligned** with the `.txt` annotation files.  
+- The frame filenames should match the expected format in `image_tmpl` in the dataset class.
+- If frames and `.txt` files are misaligned, update the dataset loading logic to match the correct frame indices.
+
+### Missing or Incorrect Annotations
+- If you encounter issues with missing annotations, ensure that the `gen_fine_labels.py` script ran successfully.
+- Verify that the generated `train_combined.txt`, `validation_combined.txt`, and `test_combined.txt` files contain expected entries.
+
+### Model Fails to Load Weights
+- If the model does not load pretrained weights, check if the required checkpoint file is present in `pretrained_models/`.
+- Ensure the `--tune_from` path is correct when fine-tuning.
+
+### Performance Issues
+- If training or evaluation is slow, reduce `--batch-size` or `--num_segments`.
+- Ensure `num_workers (-j)` is properly set for optimal data loading performance.
+
 ---
 ## Citation
 If you use this code or dataset in your research, please cite the Assembly101 dataset paper.
