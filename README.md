@@ -83,7 +83,31 @@ python test_models.py Assembly101 \
   --weights "pretrained_models/TSM_Assembly101_combined_resnet50_shift8_blockres_avg_segment8_e50.pth.tar" \
   --test_segments 8 --batch_size 64 -j 16 --test_crops 1 \
   --text_file data/validation_combined.txt
+
 ```
+## Generating Action Predictions for the Test Set
+
+To generate action predictions for the test set, run `test_models.py` with `test_combined.txt` as the `text_file`, similar to the following command:
+
+### **Test Set Prediction Command**
+```bash
+python test_models.py Assembly101 \
+  --weights="path_to_weight" \
+  --test_segments 8 --batch_size 64 -j 16 --test_crops 1 \
+  --text_file data/test_combined.txt
+```
+
+### **Expected Output Files**
+- **`preds.npy`**: Contains the predicted fine-grained action labels for each test segment.
+- **`scores.npy`**: Contains the score vectors (1380-dimensional) for each test segment.
+
+---
+
+## Notes
+- Ensure that `path_to_weight` is correctly set to the trained model checkpoint.
+- The `data/test_combined.txt` file should be correctly aligned with the extracted frames.
+- Adjust `--batch_size` and `-j` based on your hardware resources.
+
 ### Output Files:
 - `preds.npy`: Contains predicted fine-grained action labels for each segment (in the same order as in the text file).
 - `scores.npy`: Contains the score vectors (1380-dimensional) for each segment.
